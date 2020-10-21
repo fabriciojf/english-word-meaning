@@ -12,12 +12,18 @@ import com.fabriciojf.english.model.Word;
 import com.fabriciojf.english.repository.MeaningRepository;
 import com.fabriciojf.english.repository.WordRepository;
 
+/**
+ * @author Fabricio S Costa fabriciojf@gmail.com
+ * @class WordController
+ * @version 1.0
+ * @since 21/10/2020
+ */
 @Controller
 public class WordController {
 
     @Autowired
     private WordRepository wrepo;
-    
+
     @Autowired
     private MeaningRepository mrepo;
 
@@ -29,7 +35,7 @@ public class WordController {
     @RequestMapping(value = "/addWord", method = RequestMethod.POST)
     public String addForm(Word word) {
         wrepo.save(word);
-        
+
         return "word/addWords";
     }
 
@@ -38,7 +44,7 @@ public class WordController {
         ModelAndView mview = new ModelAndView("word/listWords");
         Iterable<Word> words = wrepo.findAll();
         mview.addObject("words", words);
-        
+
         return mview;
     }
 
@@ -47,17 +53,17 @@ public class WordController {
         ModelAndView mview = new ModelAndView("word/detailWord");
         Word word = wrepo.findById(id);
         mview.addObject("word", word);
-        
+
         return mview;
     }
-    
+
     @RequestMapping(value = "/detailWord/{id}", method = RequestMethod.POST)
-    public String detailWord(@PathVariable("id") int id, Meaning meaning) {        
-        Word word = wrepo.findById(id);        
-        meaning.setWord(word); 
+    public String detailWord(@PathVariable("id") int id, Meaning meaning) {
+        Word word = wrepo.findById(id);
+        meaning.setWord(word);
         mrepo.save(meaning);
-        
-        return "redirect:/detailWord/{id}";        
+
+        return "redirect:/detailWord/{id}";
     }
-    
+
 }
