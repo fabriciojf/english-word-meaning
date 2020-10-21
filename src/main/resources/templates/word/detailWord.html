@@ -1,0 +1,60 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+              rel="stylesheet" />
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarNav" 
+                    aria-controls="navbarNav" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse mr-auto" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addWord">Add Words</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listWords">List Words</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h3 class="card-title">English Words for conversations</h3>
+                    </div>
+                    <div th:each="word : ${word}">
+                        <p>ID: <span th:text="${word.id}"></span></p>
+                        <p>Word: <span th:text="${word.wordReference}"></span></p>
+                        <p>Meaning: <span th:text="${word.mainMeaning}"></span></p>
+                    </div>
+                </div>		
+            </div>
+            <div class="row">                
+                <form method="post">
+                    <input type="text" value="" name="meaningOption">                    
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </form>                
+            </div>
+        </div>
+
+        <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="webjars/jquery/3.4.1/jquery.min.js"></script>
+
+    </body>
+</html>
