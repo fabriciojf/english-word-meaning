@@ -23,9 +23,9 @@ public class DataConfiguration {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/englishwords");
-        dataSource.setUsername("root");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/englishwords");
+        dataSource.setUsername("postgres");
         dataSource.setPassword("cp65482jf");
         return dataSource;
     }
@@ -33,10 +33,10 @@ public class DataConfiguration {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabase(Database.MYSQL);
+        adapter.setDatabase(Database.POSTGRESQL);
         adapter.setShowSql(true);
         adapter.setGenerateDdl(true);
-        adapter.setDatabasePlatform("org.hibernate.dialect.MariaDBDialect");
+        adapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
         adapter.setPrepareConnection(true);
         return adapter;
     }
