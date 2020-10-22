@@ -53,12 +53,15 @@ public class WordController {
         ModelAndView mview = new ModelAndView("word/detailWord");
         Word word = wrepo.findById(id);
         mview.addObject("word", word);
+        
+        Iterable<Meaning> meanings = mrepo.findByWord(word);
+        mview.addObject("meanings", meanings);
 
         return mview;
     }
 
     @RequestMapping(value = "/detailWord/{id}", method = RequestMethod.POST)
-    public String detailWord(@PathVariable("id") int id, Meaning meaning) {
+    public String detailWordMeaning(@PathVariable("id") int id, Meaning meaning) {
         Word word = wrepo.findById(id);
         meaning.setWord(word);
         mrepo.save(meaning);

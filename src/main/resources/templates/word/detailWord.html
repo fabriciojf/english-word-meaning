@@ -51,6 +51,23 @@
                     <button class="btn btn-primary" type="submit">Save</button>
                 </form>                
             </div>
+            <div class="row">
+                <div class="card my-5">
+                    <div class="card-body">
+                        <h3 class="card-title">Meanings</h3>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        </thead>    
+                        <tbody>
+                            <tr th:each="meaning : ${meanings}">
+                                <td>ID: <span th:text="${meaning.id}"></span></td>
+                                <td>Word: <span th:text="${meaning.meaningOption}"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>		
+            </div>
         </div>
 
         <script src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
