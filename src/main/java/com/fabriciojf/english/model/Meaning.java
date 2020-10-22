@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author Fabricio S Costa fabriciojf@gmail.com
@@ -24,6 +25,7 @@ public class Meaning implements Serializable {
     private int id;
 
     @Column(name = "meaning_option")
+    @NotEmpty
     private String meaningOption;
 
     @ManyToOne

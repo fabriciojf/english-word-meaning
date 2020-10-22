@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fabriciojf.english.model.Word;
 import com.fabriciojf.english.repository.MeaningRepository;
 import com.fabriciojf.english.repository.WordRepository;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * @author Fabricio S Costa fabriciojf@gmail.com
@@ -56,16 +59,26 @@ public class WordController {
         
         Iterable<Meaning> meanings = mrepo.findByWord(word);
         mview.addObject("meanings", meanings);
+        mview.addObject("flashMessage", (String) "aa");
 
         return mview;
     }
 
     @RequestMapping(value = "/detailWord/{id}", method = RequestMethod.POST)
-    public String detailWordMeaning(@PathVariable("id") int id, Meaning meaning) {
+    public String detailWordMeaning(@PathVariable("id") int id, 
+            @Valid Meaning meaning, BindingResult result,
+            RedirectAttributes attributes) {
+        
+        if (result.hasErrors()) {
+            attributes.addFlashAttribute("flashMessage", "Verify the fields");
+            return "redirect:/detailWord/{id}";
+        }
+        
         Word word = wrepo.findById(id);
         meaning.setWord(word);
         mrepo.save(meaning);
-
+        
+        attributes.addFlashAttribute("flashMessage", "Meaning added Succefully!");
         return "redirect:/detailWord/{id}";
     }
 
