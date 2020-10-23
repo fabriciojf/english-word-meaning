@@ -29,49 +29,49 @@ public class WordController {
 
     @Autowired
     private MeaningRepository mrepo;
-
-    @RequestMapping(value = "/addWord", method = RequestMethod.GET)
+   
+    @RequestMapping(value = "/add-word", method = RequestMethod.GET)
     public String addForm() {
-        return "word/addWords";
+        return "word/add-words";
     }
 
-    @RequestMapping(value = "/addWord", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-word", method = RequestMethod.POST)
     public String addForm(Word word) {
         wrepo.save(word);
 
-        return "word/addWords";
+        return "word/add-words";
     }
 
-    @RequestMapping(value = "/listWords")
+    @RequestMapping(value = "/list-words")
     public ModelAndView listWords() {
-        ModelAndView mview = new ModelAndView("word/listWords");
+        ModelAndView mview = new ModelAndView("word/list-words");
         Iterable<Word> words = wrepo.findAll();
         mview.addObject("words", words);
 
         return mview;
     }
 
-    @RequestMapping(value = "/detailWord/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/detail-word/{id}", method = RequestMethod.GET)
     public ModelAndView detailWord(@PathVariable("id") int id) {
-        ModelAndView mview = new ModelAndView("word/detailWord");
+        ModelAndView mview = new ModelAndView("word/detail-word");
         Word word = wrepo.findById(id);
         mview.addObject("word", word);
         
         Iterable<Meaning> meanings = mrepo.findByWord(word);
         mview.addObject("meanings", meanings);
-        mview.addObject("flashMessage", (String) "aa");
 
         return mview;
     }
 
-    @RequestMapping(value = "/detailWord/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/detail-word/{id}", method = RequestMethod.POST)
     public String detailWordMeaning(@PathVariable("id") int id, 
             @Valid Meaning meaning, BindingResult result,
             RedirectAttributes attributes) {
         
         if (result.hasErrors()) {
             attributes.addFlashAttribute("flashMessage", "Verify the fields");
-            return "redirect:/detailWord/{id}";
+            attributes.addFlashAttribute("flashType", "danger");
+            return "redirect:/detail-word/{id}";
         }
         
         Word word = wrepo.findById(id);
@@ -79,7 +79,29 @@ public class WordController {
         mrepo.save(meaning);
         
         attributes.addFlashAttribute("flashMessage", "Meaning added Succefully!");
-        return "redirect:/detailWord/{id}";
+        attributes.addFlashAttribute("flashType", "success");
+        
+        return "redirect:/detail-word/{id}";
+    }
+    
+    @RequestMapping("/remove-word/{id}")
+    public String removeWord(int id) {
+        
+        Word word = wrepo.findById(id);        
+        wrepo.delete(word);        
+        
+        return "redirect:/list-words";
+    }
+    
+    @RequestMapping("/remove-meaning/{id}")
+    public String removeMeaning(int id) {
+        
+        Meaning meaning = mrepo.findById(id);        
+        int wordId = meaning.getWord().getId();
+                
+        mrepo.delete(meaning);
+        
+        return "redirect:/detail-word/" + wordId;
     }
 
 }

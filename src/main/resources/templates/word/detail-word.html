@@ -22,8 +22,10 @@
                     </div>
                 </div>		
             </div>
-            
-            <div th:replace="validations :: alert (type='danger', message=${flashMessage})"></div>
+                 
+            <div th:if="${flashMessage != null}">
+                <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
+            </div>
             
             <div class="row">                
                 <form method="post">
@@ -40,12 +42,14 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Word</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>    
                             <tbody>
                                 <tr th:each="meaning : ${meanings}">
                                     <td><span th:text="${meaning.id}"></span></td>
                                     <td><span th:text="${meaning.meaningOption}"></span></td>
+                                    <td><a th:href="${(#mvc.url('WC#removeMeaning').arg(0, meaning.id)).build()}"><span>Remove</span></a></td>
                                 </tr>
                             </tbody>
                         </table>

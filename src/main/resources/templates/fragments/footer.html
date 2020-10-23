@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
     </head>
     <body>
-        <div class="container my-5" th:fragment="footer">
-            &copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Fabriciojf
+        <div class="container my-5 " th:fragment="footer">
+            <div class="row">
+                <div class="col-6">
+                    &copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Fabriciojf
+                </div>
+                <div class="col-6 text-right">
+                    <div sec:authorize="isAuthenticated()">                                     
+                        User: <span sec:authentication="name"></span>
+                        Roles: <span sec:authentication="principal.authorities"></span>
+                    </div>
+                </div>
+            </div>
+
             <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
             <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         </div>
