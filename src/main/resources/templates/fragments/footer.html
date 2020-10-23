@@ -3,8 +3,8 @@
     <head>
     </head>
     <body>
-        <div th:fragment="footer">
-            &copy; 2020 Fabriciojf
+        <div class="container" th:fragment="footer">
+            &copy; <span th:text="${#dates.year(#dates.createNow())}"></span> Fabriciojf
             <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
             <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         </div>
