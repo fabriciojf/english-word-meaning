@@ -14,5 +14,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface MeaningRepository extends CrudRepository<Meaning, String> {
 
     List<Meaning> findByWord(Word word);
+    Meaning findById(int id);
     
 }

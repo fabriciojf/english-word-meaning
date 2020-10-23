@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="navbar navbar-expand-md navbar-light bg-light" th:fragment="header">
-            <a class="navbar-brand" href="#">Fabriciojf English Words</a>
+            <a class="navbar-brand" href="/">Fabriciojf English Words</a>
             <button class="navbar-toggler" type="button" 
                     data-toggle="collapse" 
                     data-target="#navbarNav" 
@@ -16,17 +16,28 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul sec:authorize="!isAuthenticated()" class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/addWord">Add Words</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/listWords">List Words</a>
+                        <a class="nav-link" href="/list-words">Login</a>
                     </li>
                 </ul>
+                <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto"> 
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add-word">Add Words</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/list-words">List Words</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>    
             </div>
         </div>
     </body>

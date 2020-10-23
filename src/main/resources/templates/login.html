@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+              rel="stylesheet" />
+    </head>
+    <body>
+
+        <div th:replace="/fragments/header :: header"></div>
+
+        <div th:if="${flashMessage != null}">
+            <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
+        </div>
+
+        <div class="container">
+            <div class="card w-50 mx-auto my-5">
+                <div class="card-body">
+                    <h3 class="card-title">Login page</h3>
+                    <p th:if="${loginError}" class="error">Wrong user or password</p>
+                    <form th:action="@{/login}" method="post">
+
+                        <div class="form-group">
+                            <label for="username">Username</label>:
+                            <input type="text" class="form-control-sm" id="username" name="username" autofocus="autofocus" placeholder="Enter email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>:
+                            <input type="password" class="form-control-sm" id="password" name="password" placeholder="Enter Password">
+                        </div>
+
+                        <input type="submit" class="btn btn-primary btn-sm" value="Log in" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="/fragments/footer :: footer"></div>
+    </body>
+</html>
