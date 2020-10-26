@@ -1,6 +1,6 @@
 # English Word Meaning
 
-This project is a Spring Boot Model with web view, Repository, PostgreSQL connection, security system with Spring Security and Bootstrap integration. This system allow the words register and your meanings, for documentation and future searchs during english learning journey. Is a small project, but presents a how simple is create a project with Spring Boot Framework.
+This project is a Spring Boot Model with web view, Repository, PostgreSQL connection, security system with Spring Security and Bootstrap integration. This system allow the words register and your meanings, for documentation and future researchs during english learning journey. Is a small project, but presents a how simple is create a project with Spring Boot Framework.
 
 ### Users allowed
 
