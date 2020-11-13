@@ -32,7 +32,7 @@ For change a new port see the file application.properties
 * [DataConfiguration.java](https://github.com/fabriciojf/english-word-meaning/blob/main/src/main/java/com/fabriciojf/english/config/DataConfiguration.java)
 
 
-### Author
+### About the Author
 
 Fabricio S Costa - fabriciojf@gmail.com
 
