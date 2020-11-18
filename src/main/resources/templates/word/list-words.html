@@ -7,29 +7,24 @@
     </head>
     <body>        
         <div th:replace="/fragments/header :: header"></div> 
-        <div class="container">
-            <div class="card my-5">
-                <div class="card-body">
-                    <h3 class="card-title">English Words for conversations</h3>
-                </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Word</th>
-                            <th>Meaning</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>    
-                    <tbody>    
-                        <tr th:each="word : ${words}">                   
-                            <td><a th:href="${(#mvc.url('WC#detailWord').arg(0, word.id)).build()}"><span th:text="${word.wordReference}"></span></a></td>
-                            <td><span th:text="${word.mainMeaning}"></span></td>
-                            <td><a th:href="${(#mvc.url('WC#removeWord').arg(0, word.id)).build()}"><span>Remove</span></a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>            
-        </div>
-        <div th:replace="/fragments/footer :: footer"></div>
+        <div class="container my-3">
+            <h3 class="py-3">All Words</h3>
+            <table class="table border">
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Meaning</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="word : ${words}">
+                        <td><a th:href="${(#mvc.url('WC#detailWord').arg(0, word.id)).build()}"><span th:text="${word.wordReference}"></span></a></td>
+                        <td><span th:text="${word.mainMeaning}"></span></td>
+                        <td><a th:href="${(#mvc.url('WC#removeWord').arg(0, word.id)).build()}"><span>Remove</span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
     </body>
 </html>

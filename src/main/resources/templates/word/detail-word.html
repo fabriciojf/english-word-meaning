@@ -8,54 +8,63 @@
     <body>
 
         <div th:replace="/fragments/header :: header"></div>
-            
+
         <div class="container">
+            
             <div class="row">
-                <div class="card my-5 w-100">
+                <div th:if="${flashMessage != null}" class="col-md-12">
+                    <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
+                </div>   
+                <div class="card my-5 w-100 col-md-8">
                     <div class="card-body">
                         <h3 class="card-title">English Words for conversations</h3>
-                        <div th:each="word : ${word}">
-                            <p>ID: <span th:text="${word.id}"></span></p>
-                            <p>Word: <span th:text="${word.wordReference}"></span></p>
-                            <p>Meaning: <span th:text="${word.mainMeaning}"></span></p>
-                        </div>
+                        <form method="post" th:action="@{/update-word}">
+                            <input type="text" name="wordReference" class="form-control" th:field="${word.id}">
+                            <div th:each="word : ${word}">                                
+                                <div class="form-group">
+                                    <label for="wordReference">Word Reference</label> 
+                                    <input type="text" name="wordReference" class="form-control" th:field="${word.wordReference}" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainMeaning">Meaning</label> 
+                                    <input type="text" name="mainMeaning" class="form-control" th:field="${word.mainMeaning}">
+                                </div>
+                            </div>    
+                            <button class="btn btn-primary" type="submit">Update Word</button>
+                        </form>                        
                     </div>
-                </div>		
-            </div>
-                 
-            <div th:if="${flashMessage != null}">
-                <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
-            </div>
-            
-            <div class="row">                
-                <form method="post">
-                    <input type="text" value="" name="meaningOption">                    
-                    <button class="btn btn-primary" type="submit">Save</button>
-                </form>                
-            </div>
-            <div class="row">
-                <div class="card my-5 w-100">
-                    <div class="card-body">
-                        <h3 class="card-title">Meanings</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Word</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>    
-                            <tbody>
-                                <tr th:each="meaning : ${meanings}">
-                                    <td><span th:text="${meaning.id}"></span></td>
-                                    <td><span th:text="${meaning.meaningOption}"></span></td>
-                                    <td><a th:href="${(#mvc.url('WC#removeMeaning').arg(0, meaning.id)).build()}"><span>Remove</span></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-12 mt-5">
+                        <h4>Other Meanings</h4>
+                        <form method="post">
+                            <input type="text" value="" name="meaningOption" class="w-100 mb-3">
+                            <button class="btn btn-primary btn-sm" type="submit">Save Meaning</button>
+                        </form>                
                     </div>
-                </div>		
-            </div>
+                    <div class="col-12">
+                        <div class="card my-2 w-100">
+                            <div class="card-body">                                
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Word</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>    
+                                    <tbody>
+                                        <tr th:each="meaning : ${meanings}">
+                                            <td><span th:text="${meaning.meaningOption}"></span></td>
+                                            <td><a th:href="${(#mvc.url('WC#removeMeaning').arg(0, meaning.id)).build()}"><span>Remove</span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>		
+                    </div>
+                </div>
+            </div>         
+
         </div>
 
         <div th:replace="/fragments/footer :: footer"></div>

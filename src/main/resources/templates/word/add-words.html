@@ -10,18 +10,35 @@
         <div th:replace="/fragments/header :: header"></div>
 
         <div class="container">
-            <div class="card my-5">
-                <div class="card-body">
-                    <h3 class="card-title">Cadastro de Words</h3>
-                    <form method="post">
-                        <label>Word Reference</label> 
-                        <input type="text" value="" name="wordReference">
+            <div class="row">
 
-                        <label>Meaning</label> 
-                        <input type="text" value="" name="mainMeaning">
+                <div th:if="${flashMessage != null}">
+                    <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
+                </div>
 
-                        <button class="btn btn-primary" type="submit">Save</button>
-                    </form>
+                <div class="card my-5 col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">Adding Words </h3>
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="wordReference">Word Reference</label> 
+                                <input type="text" value="" name="wordReference" class="form-control" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="mainMeaning">Meaning</label> 
+                                <input type="text" value="" name="mainMeaning" class="form-control">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Save new Word</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4 my-5">
+                    <h4 class="pb-2">Last 5</h4>
+                    <ul class="list-group">
+                        <li th:each="word : ${words}" class="list-group-item">
+                            <b><td><a th:href="${(#mvc.url('WC#detailWord').arg(0, word.id)).build()}"><span th:text="${word.wordReference}"></span></a></td></b> : <span th:text="${word.mainMeaning}"></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

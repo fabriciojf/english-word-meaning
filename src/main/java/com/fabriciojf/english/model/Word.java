@@ -54,7 +54,7 @@ public class Word implements Serializable {
     }
 
     public void setWordReference(String wordReference) {
-        this.wordReference = wordReference;
+        this.wordReference = wordReference.trim();
     }
 
     public String getMainMeaning() {

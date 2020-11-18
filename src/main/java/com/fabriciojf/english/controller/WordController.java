@@ -12,6 +12,9 @@ import com.fabriciojf.english.model.Word;
 import com.fabriciojf.english.repository.MeaningRepository;
 import com.fabriciojf.english.repository.WordRepository;
 import javax.validation.Valid;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,21 +34,61 @@ public class WordController {
     private MeaningRepository mrepo;
    
     @RequestMapping(value = "/add-word", method = RequestMethod.GET)
-    public String addForm() {
-        return "word/add-words";
+    public ModelAndView addForm(RedirectAttributes attributes) {
+        
+        Pageable limit = PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "id"));
+        Iterable<Word> words = wrepo.findAll(limit);
+        ModelAndView mview = new ModelAndView("word/add-words");
+        mview.addObject("words", words);
+        
+        attributes.addFlashAttribute("flashMessage", "Meaning added Succefully!");
+        attributes.addFlashAttribute("flashType", "success");
+        
+        return mview;
     }
 
     @RequestMapping(value = "/add-word", method = RequestMethod.POST)
     public String addForm(Word word) {
-        wrepo.save(word);
-
-        return "word/add-words";
+        
+        if (wrepo.findByWordReference(word.getWordReference().trim()) == null) {
+            wrepo.save(word);            
+        }        
+        return "redirect:/add-word";
+    }
+    
+    @RequestMapping(value = "/update-word", method = RequestMethod.POST)
+    public String updateForm(Word word, RedirectAttributes attributes) {        
+        wrepo.save(word);        
+        
+        attributes.addFlashAttribute("flashMessage", "Meaning Updated Successfully!");
+        attributes.addFlashAttribute("flashType", "success");
+        
+        return "redirect:/detail-word/" + word.getId();
     }
 
     @RequestMapping(value = "/list-words")
     public ModelAndView listWords() {
+        
+        // Paging items, with sort need JpaRepository instead of CrudRepository
+        Pageable limit = PageRequest.of(0, 200, Sort.by(Sort.Direction.ASC, "wordReference"));
+        
         ModelAndView mview = new ModelAndView("word/list-words");
-        Iterable<Word> words = wrepo.findAll();
+        Iterable<Word> words = wrepo.findAll(limit);
+        
+        mview.addObject("words", words);
+
+        return mview;
+    }
+        
+    @RequestMapping(value = "/print-words")
+    public ModelAndView printWords() {
+        
+        // Paging items, with sort need JpaRepository instead of CrudRepository
+        Pageable limit = PageRequest.of(0, 200, Sort.by(Sort.Direction.ASC, "wordReference"));
+        
+        ModelAndView mview = new ModelAndView("word/print-words");
+        Iterable<Word> words = wrepo.findAll(limit);
+        
         mview.addObject("words", words);
 
         return mview;

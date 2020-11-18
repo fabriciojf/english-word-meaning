@@ -1,0 +1,18 @@
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+              rel="stylesheet">
+    </head>
+    <body>        
+        <div th:replace="/fragments/header :: header"></div> 
+        <div class="container-fluid">            
+            <div class="row">
+                <div th:each="word : ${words}" class="col-md-4 border border-bottom-0 border-left-0 border-right-0 border-secondary py-1">
+                    <b><span th:text="${word.wordReference}"></span></b> : <span th:text="${word.mainMeaning}"></span>
+                </div>
+            </div>            
+        </div>
+    </body>
+</html>
