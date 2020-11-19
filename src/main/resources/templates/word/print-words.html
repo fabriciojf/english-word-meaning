@@ -9,8 +9,8 @@
         <div th:replace="/fragments/header :: header"></div> 
         <div class="container-fluid">            
             <div class="row">
-                <div th:each="word : ${words}" class="col-md-4 border border-bottom-0 border-left-0 border-right-0 border-secondary py-1">
-                    <b><span th:text="${word.wordReference}"></span></b> : <span th:text="${word.mainMeaning}"></span>
+                <div th:each="word : ${words}" class="col-md-6 border border-bottom-0 border-left-0 border-right-0 border-secondary py-2">
+                    <b><span th:text="${word.wordReference}" style="font-size: 27px"></span></b> : <span th:text="${word.mainMeaning}" style="font-size: 27px"></span>
                 </div>
             </div>            
         </div>
