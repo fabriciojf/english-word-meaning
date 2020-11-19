@@ -63,6 +63,13 @@ Save the file and run a service with the command
 $ sudo service english start
 ```
 
+Other commands
+
+```console
+$ sudo service english
+Usage: /etc/init.d/english {start|stop|force-stop|restart|force-reload|status|run}
+```
+
 ### About the Author
 
 Fabricio S Costa - fabriciojf@gmail.com
