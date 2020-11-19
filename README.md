@@ -34,6 +34,35 @@ For change a new port see the file application.properties
 * [DataConfiguration.java](https://github.com/fabriciojf/english-word-meaning/blob/main/src/main/java/com/fabriciojf/english/config/DataConfiguration.java)
 
 
+### Running as a Linux Service
+
+Create a new file in /etc/systemd/system directory
+
+```console
+$ nano /etc/systemd/system/english.service
+```
+
+Insert a service content editing the file path and the description
+
+```console
+[Unit]
+Description=English Words
+After=syslog.target
+
+[Service]
+User=root
+ExecStart=/opt/apps/english.jar SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save the file and run a service with the command
+
+```console
+$ sudo service english start
+```
+
 ### About the Author
 
 Fabricio S Costa - fabriciojf@gmail.com

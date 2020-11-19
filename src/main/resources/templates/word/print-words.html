@@ -6,7 +6,7 @@
               rel="stylesheet">
     </head>
     <body>        
-        <div th:replace="/fragments/header :: header"></div> 
+        <div th:replace="fragments/header :: header"></div> 
         <div class="container-fluid">            
             <div class="row">
                 <div th:each="word : ${words}" class="col-md-6 border border-bottom-0 border-left-0 border-right-0 border-secondary py-2">

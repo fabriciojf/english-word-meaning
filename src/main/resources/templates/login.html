@@ -8,7 +8,7 @@
     </head>
     <body>
 
-        <div th:replace="/fragments/header :: header"></div>
+        <div th:replace="fragments/header :: header"></div>
 
         <div th:if="${flashMessage != null}">
             <div th:replace="validations :: alert (type=${flashType}, message=${flashMessage})"></div>
@@ -37,6 +37,6 @@
             </div>
         </div>
 
-        <div th:replace="/fragments/footer :: footer"></div>
+        <div th:replace="fragments/footer :: footer"></div>
     </body>
 </html>

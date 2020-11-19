@@ -135,6 +135,7 @@
                 <configuration>
                     <fork>true</fork>
                     <mainClass>${start-class}</mainClass>
+                    <executable>true</executable>    
                 </configuration>
                 <executions>
                     <execution>
