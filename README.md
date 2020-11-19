@@ -18,16 +18,18 @@ With eclipse
 * Run
 * Access at address http://localhost:3031
 
+#### Ports
+
 For change a new port see the file application.properties
 
 * [application.properties](https://github.com/fabriciojf/english-word-meaning/blob/main/src/main/resources/application.properties)
 
-### Users allowed
+#### Users allowed
 
 * [SecurityConfig.java](https://github.com/fabriciojf/english-word-meaning/blob/main/src/main/java/com/fabriciojf/english/configuration/SecurityConfig.java)
 
 
-### Database Configuration
+#### Database Configuration
 
 * [DataConfiguration.java](https://github.com/fabriciojf/english-word-meaning/blob/main/src/main/java/com/fabriciojf/english/config/DataConfiguration.java)
 
